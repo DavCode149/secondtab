@@ -175,7 +175,11 @@
   </style>
 </head>
 <body>
-
+<script>
+    function OpenLink() {
+    javascript: var win = window.open();   win.document.body.style.margin = '0';   win.document.body.style.height = '100vh';   var iframe = win.document.createElement('iframe');   iframe.style.border = 'none';   iframe.style.width = '100%';   iframe.style.height = '100%';   iframe.style.margin = '0';   iframe.src = "home.html";   win.document.body.appendChild(iframe);
+    }
+</script>
   <div class="blob one"></div>
   <div class="blob two"></div>
 
@@ -184,7 +188,7 @@
     <p>A modern web portal for proxies, useful tools, games, and resources — all accessible directly in your browser.</p>
     <div class="cta">
       <button class="btn primary" onclick="location.href='home.html'">Home</button>
-      <button class="btn secondary">Browse</button>
+      <button class="btn secondary" onclick="openLink()">Home (Cloaked)</button>
     </div>
   </header>
 
