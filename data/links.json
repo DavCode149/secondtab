@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Google Docs",
+    "image": "/images/docs.png"
+    "url": "https://docs.google.com",
+    "category": "productivity"
+  },
+  {
+    "name": "YouTube",
+    "image": "/images/youtube.png"
+    "url": "https://youtube.com",
+    "category": "media"
+  }
+]
