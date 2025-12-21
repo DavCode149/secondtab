@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bypass Hub — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --panel: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.12);
+      --accent: #7dd3fc;
+      --accent2: #a78bfa;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #111827, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+
+    aside {
+      background: rgba(0,0,0,0.4);
+      border-right: 1px solid var(--border);
+      padding: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav a {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateX(4px);
+    }
+
+    main {
+      padding: 28px;
+      overflow-y: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+
+    header h1 { font-size: 1.8rem; }
+
+    .actions button {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+    }
+
+    .card h3 { margin-bottom: 12px; font-size: 1.1rem; }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .quick-links a {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
+      color: var(--text);
+      text-align: center;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .quick-links a:hover {
+      transform: scale(1.04);
+      background: rgba(255,255,255,0.14);
+    }
+
+    .news-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .news-item:last-child { border-bottom: none; }
+    .news-item span { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+    .news-item a { color: var(--accent); text-decoration: none; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .stat { background: rgba(255,255,255,0.06); border-radius: 14px; padding: 16px; text-align: center; }
+    .stat strong { font-size: 1.4rem; display: block; }
+
+    footer { margin-top: 30px; text-align: center; color: var(--muted); font-size: 0.8rem; }
+
+    @media (max-width: 900px) { body { grid-template-columns: 1fr; } aside { display: none; } }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <div class="logo">Bypass Hub</div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Proxies</a>
+      <a href="#">Games</a>
+      <a href="#">Useful Links</a>
+      <a href="#">Tools</a>
+      <a href="#">Settings</a>
+    </nav>
+  </aside>
+
+  <main>
+    <header>
+      <h1>Dashboard</h1>
+      <div class="actions">
+        <button>Quick Exit</button>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h3>⚡ Quick Links</h3>
+        <div class="quick-links" id="quick-links"></div>
+      </div>
+
+      <div class="card">
+        <h3>📰 News & Updates</h3>
+        <div class="news" id="news"></div>
+      </div>
+
+      <div class="card">
+        <h3>📊 Stats</h3>
+        <div class="stats">
+          <div class="stat"><strong id="links-count">0</strong>Links</div>
+          <div class="stat"><strong id="games-count">0</strong>Games</div>
+          <div class="stat"><strong id="proxies-count">0</strong>Proxies</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠 System</h3>
+        <p style="color: var(--muted); line-height: 1.5;">Add panic mode, theme toggle, login state, or access rules here later.</p>
+      </div>
+    </section>
+
+    <footer>© 2025 Bypass Hub — Dashboard</footer>
+  </main>
+
+  <script>
+    // Load Quick Links
+    fetch('data/links.json')
+      .then(res => res.json())
+      .then(links => {
+        const container = document.getElementById('quick-links');
+        container.innerHTML = '';
+        links.forEach(link => {
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.textContent = link.name;
+          container.appendChild(a);
+        });
+        document.getElementById('links-count').textContent = links.length;
+      });
+
+    // Load Games
+    fetch('data/games.json')
+      .then(res => res.json())
+      .then(games => {
+        document.getElementById('games-count').textContent = games.length;
+      });
+
+    // Load Proxies
+    fetch('data/proxies.json')
+      .then(res => res.json())
+      .then(proxies => {
+        document.getElementById('proxies-count').textContent = proxies.length;
+      });
+
+    // Load News
+    fetch('data/news.json')
+      .then(res => res.json())
+      .then(news => {
+        const container = document.getElementById('news');
+        container.innerHTML = '';
+        news.forEach(article => {
+          const div = document.createElement('div');
+          div.className = 'news-item';
+          div.innerHTML = `<span>${article.date}</span>
+            <strong>${article.title}</strong>
+            <p>${article.summary}</p>
+            <a href='article.html?id=${article.id}'>Read more →</a>`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+
+</body>
+</html>
