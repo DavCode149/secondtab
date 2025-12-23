@@ -2,12 +2,12 @@
   {
     "id": "interstellar",
     "name": "Interstellar",
-    "description": "Fast school-safe proxy service",
+    "description": "OG Proxy",
     "image": "images/interstellar.png",
     "links": [
-      { "label": "Main URL", "url": "https://example1.com" },
-      { "label": "Backup URL", "url": "https://example2.com" },
-      { "label": "Mirror", "url": "https://example3.com" }
+      { "label": "Link 1", "url": "https://wano.gscmec.com/" },
+      { "label": "Link 2", "url": "https://bd2b0c9e.intermath.pages.dev/" },
+      { "label": "Backup Link", "url": "https://perry.strangled.net/" }
     ]
   }
 ]
