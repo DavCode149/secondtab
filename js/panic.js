@@ -41,7 +41,7 @@
 
   // Iframe
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://classroom.google.com';
+  iframe.src = 'https://google.com';
   iframe.style.cssText = `
     width: 100%;
     height: 100%;
