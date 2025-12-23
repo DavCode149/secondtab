@@ -94,13 +94,24 @@ header h1 {
   font-size: 0.9rem;
 }
 
+/* ===== MODAL WITH ANIMATION ===== */
+
 .modal {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.7);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .modal-content {
@@ -110,6 +121,15 @@ header h1 {
   width: 90%;
   max-width: 420px;
   border: 1px solid var(--border);
+
+  transform: translateY(20px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.modal.active .modal-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .modal a {
@@ -132,6 +152,8 @@ header h1 {
   cursor: pointer;
   margin-bottom: 10px;
 }
+
+/* ===== RESPONSIVE ===== */
 
 @media (max-width: 900px) {
   body { grid-template-columns: 1fr; }
@@ -159,6 +181,7 @@ header h1 {
   <section class="grid" id="proxy-grid"></section>
 </main>
 
+<!-- ===== MODAL ===== -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <div class="close" onclick="closeModal()">✕ Close</div>
@@ -170,7 +193,7 @@ header h1 {
 <script>
 let proxyData = [];
 
-fetch('data/proxies.json')
+fetch('data/proxies.json?v=' + Date.now())
   .then(res => res.json())
   .then(data => {
     proxyData = data;
@@ -182,12 +205,13 @@ fetch('data/proxies.json')
       div.innerHTML = `
         ${proxy.image && proxy.image !== 'none' ? `<img src="${proxy.image}" alt="${proxy.name}">` : ''}
         <h3>${proxy.name}</h3>
-        <p>${proxy.description}</p>
+        <p>${proxy.description || ''}</p>
       `;
       div.onclick = () => openModal(proxy.id);
       grid.appendChild(div);
     });
-  });
+  })
+  .catch(err => console.error('Proxy JSON error:', err));
 
 function openModal(id) {
   const proxy = proxyData.find(p => p.id === id);
@@ -204,12 +228,17 @@ function openModal(id) {
     links.appendChild(a);
   });
 
-  document.getElementById('modal').style.display = 'flex';
+  document.getElementById('modal').classList.add('active');
 }
 
 function closeModal() {
-  document.getElementById('modal').style.display = 'none';
+  document.getElementById('modal').classList.remove('active');
 }
+
+/* Click outside to close */
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target.id === 'modal') closeModal();
+});
 </script>
 
 </body>
