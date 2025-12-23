@@ -260,12 +260,35 @@ preset.onchange = () => {
   icon.value = p.icon;
 };
 
+function restoreCloakSettings() {
+  const enabledVal = JSON.parse(localStorage.getItem('cloakEnabled'));
+  const titleVal = JSON.parse(localStorage.getItem('cloakTitle'));
+  const iconVal = JSON.parse(localStorage.getItem('cloakIcon'));
+
+  cloakEnabled.checked = !!enabledVal;
+  cloakTitle.value = titleVal || '';
+  cloakIcon.value = iconVal || '';
+
+  // Match preset dropdown if possible
+  cloakPreset.value = '';
+  for (const key in presets) {
+    if (
+      presets[key].title === cloakTitle.value &&
+      presets[key].icon === cloakIcon.value
+    ) {
+      cloakPreset.value = key;
+      break;
+    }
+  }
+}
+  
 /* ===== LOAD SAVED SETTINGS ===== */
 window.onload = () => {
   if (load('panicKey')) panicInput.value = load('panicKey');
   enabled.checked = load('cloakEnabled') || false;
   title.value = load('cloakTitle') || '';
   icon.value = load('cloakIcon') || '';
+  restoreCloakSettings();
   applyCloak();
 };
 </script>
