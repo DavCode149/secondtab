@@ -10,4 +10,16 @@
       { "label": "Backup Link", "url": "https://perry.strangled.net/" }
     ]
   }
+  
+  {
+    "id": "bolt",
+    "name": "Bolt Network",
+    "description": "Cool looking browser proxy",
+    "image": "images/bolt.jpg",
+    "links": [
+      { "label": "Link 1", "url": "https://bolteducation.chiangmaiorganics.com" },
+      { "label": "Link 2", "url": "https://county.news.1copa.com/ " },
+      { "label": "Backup Link", "url": "https://courses.bolt.installgentoo.com" }
+    ]
+  }
 ]
