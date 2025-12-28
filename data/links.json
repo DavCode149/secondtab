@@ -1,14 +1,14 @@
 [
   {
-    "name": "Google Docs",
-    "image": "/images/docs.png",
-    "url": "https://docs.google.com",
-    "category": "productivity"
+    "name": "SecondTab Discord",
+    "image": "/images/discord.png",
+    "url": "https://discord.gg/sSPTr7turf",
+    "category": "important"
   },
   {
-    "name": "YouTube",
-    "image": "/images/youtube.png",
-    "url": "https://youtube.com",
-    "category": "media"
+    "name": "DD Games",
+    "image": "/images/dd-games.png",
+    "url": "https://davcode149.github.io/secondtab/games.html",
+    "category": "games"
   }
 ]
