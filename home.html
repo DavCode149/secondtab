@@ -241,7 +241,7 @@
   fetch("https://cors.io/?u=https://pastebin.com/raw/djzAdM4j")
     .then(res => res.text())
     .then(text => {
-      document.getElementById("system-text").textContent = text;
+      document.getElementById("system-text").textContent = data.body;
     })
     .catch(() => {
       document.getElementById("system-text").textContent =
