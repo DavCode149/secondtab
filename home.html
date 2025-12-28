@@ -183,7 +183,7 @@
 
       <div class="card">
         <h3>🛠 System</h3>
-        <p style="color: var(--muted); line-height: 1.5;">Add panic mode, theme toggle, login state, or access rules here later.</p>
+        <p id="system-text" style="color: var(--muted); line-height: 1.5;">Add panic mode, theme toggle, login state, or access rules here later.</p>
       </div>
     </section>
 
@@ -236,6 +236,17 @@
           container.appendChild(div);
         });
       });
+
+  //Load pastebin raw text
+  fetch("https://pastebin.com/raw/djzAdM4j")
+    .then(res => res.text())
+    .then(text => {
+      document.getElementById("system-text").textContent = text;
+    })
+    .catch(() => {
+      document.getElementById("system-text").textContent =
+        "Unable to load system status.";
+    });
   </script>
 <script src="js/cloak.js"></script>
 <script src="js/panic.js"></script>
