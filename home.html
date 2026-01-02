@@ -237,14 +237,14 @@
       });
 
   //Load pastebin raw text
-   fetch("secondtab.david123hackett.workers.dev")
+   fetch("https://corsproxy.io/?url=https://pastebin.com/raw/djzAdM4j")
     .then(res => res.text())
     .then(text => {
       document.getElementById("system-text").textContent = text;
     })
     .catch(() => {
       document.getElementById("system-text").textContent =
-        "Unable to load system status.";
+        "Unable to load system message at this time.";
     });
   </script>
 <script src="js/cloak.js"></script>
