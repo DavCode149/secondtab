@@ -32,7 +32,7 @@
     top: 14px;
     right: 18px;
     font-size: 24px;
-    color: white;
+    color: black;
     cursor: pointer;
     z-index: 1000000;
     user-select: none;
