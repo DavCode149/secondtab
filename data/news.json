@@ -2,14 +2,27 @@
   {
     "id": "dashboard-launch",
     "title": "Dashboard Launched",
-    "date": "2025-01-15",
-    "author": "Bypass Hub",
+    "date": "2025-12-",
+    "author": "SecondTab",
     "summary": "The new dashboard system is now live.",
-    "image": "/images/image1.png",
+    "image": "none",
     "content": [
-      "Today we officially launched the new Bypass Hub dashboard.",
+      "Today we officially launched the new SecondTab dashboard.",
       "This update introduces a cleaner layout, faster navigation, and future expansion support.",
       "More features like dynamic content and user customization are coming soon."
+    ]
+  },
+  {
+    "id": "release-date-confirmed",
+    "title": "Official Release Date Confirmed!",
+    "date": "2025-01-03",
+    "author": "SecondTab",
+    "summary": "Release date of January 7th Confirmed",
+    "image": "none",
+    "content": [
+      "We're exited to annouce our official release date!",
+      "We'll be opening SecondTab to the public on January 10th.",
+      "We've added safeguards to make sure none of the links get blocked, and we can always change them if they do."
     ]
   }
 ]
