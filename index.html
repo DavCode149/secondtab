@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Google</title>
+  <title>Page unavailable</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
+  <!-- Google-style font -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
@@ -20,48 +20,31 @@
       color: #202124;
     }
 
-    .card {
+    .container {
+      max-width: 420px;
       width: 100%;
-      max-width: 360px;
-      padding: 48px 40px 36px;
-      border: 1px solid #dadce0;
-      border-radius: 8px;
-      text-align: center;
+      padding: 40px;
     }
-
-    .logo {
-      font-size: 32px;
-      font-weight: 500;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-
-    .logo span:nth-child(1) { color: #4285f4; }
-    .logo span:nth-child(2) { color: #ea4335; }
-    .logo span:nth-child(3) { color: #fbbc05; }
-    .logo span:nth-child(4) { color: #4285f4; }
-    .logo span:nth-child(5) { color: #34a853; }
-    .logo span:nth-child(6) { color: #ea4335; }
 
     h1 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 400;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     p {
-      font-size: 16px;
+      font-size: 15px;
       color: #5f6368;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     input {
       width: 100%;
       padding: 13px 15px;
-      font-size: 16px;
+      font-size: 15px;
       border-radius: 4px;
       border: 1px solid #dadce0;
-      margin-bottom: 6px;
       outline: none;
     }
 
@@ -72,13 +55,12 @@
     .error {
       color: #d93025;
       font-size: 13px;
-      text-align: left;
-      margin-top: 6px;
+      margin-top: 8px;
       display: none;
     }
 
     .actions {
-      margin-top: 36px;
+      margin-top: 32px;
       display: flex;
       justify-content: flex-end;
     }
@@ -87,7 +69,7 @@
       background: #1a73e8;
       color: #fff;
       border: none;
-      padding: 10px 24px;
+      padding: 10px 22px;
       font-size: 14px;
       border-radius: 4px;
       cursor: pointer;
@@ -96,52 +78,100 @@
     button:hover {
       background: #1669c1;
     }
+
+    /* Loading screen */
+    .loading {
+      display: none;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e0e0e0;
+      border-top: 4px solid #1a73e8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="logo">
-      <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
-    </div>
+  <div class="container" id="gate">
+    <h1>Uh oh! Access to this webpage is restricted</h1>
+    <p>
+      This page isn’t available right now.<br>
+      If you believe you should have access, please enter the password to continue.
+    </p>
 
-    <h1>Sign in</h1>
-    <p>Use your Google Account</p>
-
-    <input type="password" id="password" placeholder="Enter your password">
-    <div class="error" id="error">Wrong password. Try again.</div>
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter password"
+      autocomplete="off"
+    >
+    <div class="error" id="error">Incorrect password.</div>
 
     <div class="actions">
-      <button onclick="unlock()">Next</button>
+      <button onclick="unlock()">Continue</button>
     </div>
   </div>
 
+  <div class="container loading" id="loading">
+    <div class="spinner"></div>
+    <p>Loading…</p>
+  </div>
+
   <script>
-    const PASSWORD = "cooked"; // change if needed
+    /* ---- Obfuscated password ---- */
+    const _k = [99, 111, 111, 107, 101, 100]; // "cooked"
+    function _p() {
+      return _k.map(c => String.fromCharCode(c)).join("");
+    }
 
     function unlock() {
       const input = document.getElementById("password").value;
+      const error = document.getElementById("error");
 
-      if (input !== PASSWORD) {
-        document.getElementById("error").style.display = "block";
+      if (input !== _p()) {
+        error.style.display = "block";
         return;
       }
 
-      // Load launcher.html and replace the entire page
-      fetch("launcher.html")
-        .then(res => {
-          if (!res.ok) throw new Error("Failed to load launcher");
-          return res.text();
-        })
-        .then(html => {
-          document.open();
-          document.write(html);
-          document.close();
-        })
-        .catch(() => {
-          alert("Failed to load launcher.html");
-        });
+      error.style.display = "none";
+
+      // Show fake loading screen
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("loading").style.display = "block";
+
+      const delay = Math.floor(Math.random() * 4000) + 1000; // 1–5 sec
+
+      setTimeout(() => {
+        fetch("launcher.html")
+          .then(r => {
+            if (!r.ok) throw new Error();
+            return r.text();
+          })
+          .then(html => {
+            document.open();
+            document.write(html);
+            document.close();
+          })
+          .catch(() => {
+            alert("Failed to load page.");
+          });
+      }, delay);
     }
+
+    // Enter key support
+    document.getElementById("password").addEventListener("keydown", e => {
+      if (e.key === "Enter") unlock();
+    });
   </script>
 
 </body>
