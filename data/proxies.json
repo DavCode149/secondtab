@@ -20,5 +20,16 @@
       { "label": "Link 2", "url": "https://bd2b0c9e.intermath.pages.dev/" },
       { "label": "Backup Link", "url": "https://perry.strangled.net/" }
     ]
+  },
+  {
+    "id": "dogeub",
+    "name": "Doge Unblocked",
+    "description": "D O G E",
+    "image": "images/doge.png",
+    "links": [
+      { "label": "Link 1", "url": "https://ytkvgvdarb.balkrishnatamang.com.np/" },
+      { "label": "Link 2", "url": "https://sjaswnzvvx.szczech.com.ar/" },
+      { "label": "Backup Link", "url": "https://nwhncebnyl.einfach-du.ch/" }
+    ]
   }
 ]
